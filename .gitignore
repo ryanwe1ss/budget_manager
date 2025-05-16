@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+env/
+venv/
+.env
+
+# Django
+db.sqlite3
+*.log
+
+# VS Code
+.vscode/
+
+# Celery
+celerybeat-schedule

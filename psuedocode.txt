@@ -1,0 +1,50 @@
+# Pseudo-code Overview
+
+## Data Models
+
+**Brand**
+- Has a daily and monthly budget
+- Tracks daily_spend and monthly_spend
+- Can have many campaigns
+
+**Campaign**
+- Belongs to a brand
+- Has its own spend (today + this month)
+- Can be active or paused
+- Connected to a dayparting schedule (optional)
+
+**DaypartingSchedule**
+- Tied to one campaign
+- Has a start_hour and end_hour (e.g. 9 to 17)
+
+**SpendLog**
+- Tracks how much a campaign spends at a given time
+- Used to simulate or record spending
+
+---
+
+## Key Logic
+
+### Spend Tracking
+- When a campaign spends, we create a `SpendLog`
+- That amount is added to:
+  - The campaign’s spend_today and spend_this_month
+  - The brand’s daily_spend and monthly_spend
+
+### Budget Enforcement
+- Every hour:
+  - If a brand is over daily or monthly budget, pause its campaigns
+
+### Dayparting
+- Every hour:
+  - Check each campaign's schedule
+  - If current time is outside allowed hours, pause it
+  - If time is inside and budgets are OK, activate it
+
+### Daily + Monthly Resets
+- Every night at midnight:
+  - Reset brand daily_spend and campaign spend_today
+  - Reactivate all campaigns that are within budget
+- On the 1st of every month:
+  - Reset brand monthly_spend and campaign spend_this_month
+  - Reactivate eligible campaigns

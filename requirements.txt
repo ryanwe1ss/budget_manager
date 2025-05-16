@@ -1,0 +1,5 @@
+Django>=4.0
+celery>=5.2
+django-celery-beat>=2.3
+psycopg2-binary>=2.9
+redis>=4.0
